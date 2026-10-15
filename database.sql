@@ -56,23 +56,19 @@ VALUES
 -- 4. CONSULTAS DE FUNCIONARIOS
 -- =====================================================
 
--- Lista todos os funcionarios de Vendas.
 SELECT *
 FROM empregados
 WHERE departamento = 'Vendas';
 
--- Lista funcionarios com salario superior a 5000.
 SELECT *
 FROM empregados
 WHERE salario > 5000;
 
--- Lista funcionarios de Vendas com salario de ate 6000.
 SELECT nome, salario
 FROM empregados
 WHERE departamento = 'Vendas'
   AND salario <= 6000;
 
--- Ordena funcionarios pelo salario, do maior para o menor.
 SELECT nome, departamento, salario
 FROM empregados
 ORDER BY salario DESC;
@@ -81,7 +77,6 @@ ORDER BY salario DESC;
 -- 5. ATUALIZACAO DE DADOS
 -- =====================================================
 
--- Atualiza os salarios dos funcionarios de TI.
 UPDATE empregados
 SET salario = 7500
 WHERE departamento = 'TI';
@@ -90,9 +85,6 @@ WHERE departamento = 'TI';
 -- 6. EXCLUSAO DE DADOS
 -- =====================================================
 
--- Exclui funcionarios com salario inferior a 4000.
--- Gerentes de projeto sao preservados para manter a integridade
--- referencial (a FOREIGN KEY impede excluir quem gerencia um projeto).
 DELETE FROM empregados
 WHERE salario < 4000
   AND ID NOT IN (SELECT id_gerente FROM projetos);
@@ -101,11 +93,9 @@ WHERE salario < 4000
 -- 7. CONSULTAS DE PROJETOS
 -- =====================================================
 
--- Lista todos os projetos.
 SELECT *
 FROM projetos;
 
--- Lista os projetos gerenciados pelo funcionario de ID 2.
 SELECT *
 FROM projetos
 WHERE id_gerente = 2;
@@ -114,7 +104,6 @@ WHERE id_gerente = 2;
 -- 8. RELACIONAMENTO ENTRE FUNCIONARIOS E PROJETOS
 -- =====================================================
 
--- Exibe cada projeto junto ao nome do seu gerente.
 SELECT
     projetos.nome_projeto,
     empregados.nome AS nome_gerente,
